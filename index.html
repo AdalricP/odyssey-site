@@ -77,16 +77,21 @@
   const pointer = { x: -1, y: -1, prevX: -1, prevY: -1, down: false };
 
   function coverRect(iw, ih, cw, ch) {
-    // small overscan crops out the parchment image's own dark crackled edges
-    const r = Math.max(cw / iw, ch / ih) * 1.06;
+    // larger overscan + symmetric pad covers the canvas even with DPR
+    // sub-pixel rounding at the right/bottom edges
+    const r = Math.max(cw / iw, ch / ih) * 1.10;
     const dw = iw * r, dh = ih * r;
     return { x: (cw - dw) / 2, y: (ch - dh) / 2, w: dw, h: dh };
   }
 
   function paintParchment(alpha) {
     if (!imgReady) return;
-    const r = coverRect(parchment.width, parchment.height, w, h);
     ctx.globalAlpha = alpha;
+    // cream fallback fill so canvas pixels are never transparent at the
+    // edges — prevents the night layer from bleeding through any tiny gap
+    ctx.fillStyle = '#e8d5a4';
+    ctx.fillRect(-2, -2, w + 4, h + 4);
+    const r = coverRect(parchment.width, parchment.height, w, h);
     ctx.drawImage(parchment, r.x, r.y, r.w, r.h);
     ctx.globalAlpha = 1;
   }
