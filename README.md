@@ -1,60 +1,20 @@
 # Odyssey
 
-A single-page brush-reveal of the Acropolis. The default view is a parchment
-illustration; click-and-drag with the mouse to paint it away and uncover the
-night/line-art version beneath. The parchment fades back in about a second
-after you release.
+Brush-reveal Acropolis. Click-and-drag to paint away the parchment.
 
-## Running locally
-
-You need Python 3 installed (it ships with macOS by default).
+## Run
 
 ```bash
 ./run.sh
 ```
 
-That starts a local server at <http://localhost:4173> and opens it in your
-browser. Press `Ctrl+C` in the terminal to stop it.
+Opens <http://localhost:4173>. Requires Python 3. `PORT=8080 ./run.sh` to override.
 
-To use a different port:
+## Swap the images
 
-```bash
-PORT=8080 ./run.sh
-```
+Replace these two files in the project root with PNGs of the same name:
 
-## Swapping the background images
+- `bg.png` — default (parchment) layer
+- `bg_black.png` — layer revealed by the brush
 
-Two images drive the page:
-
-| File           | Role                                                       |
-| -------------- | ---------------------------------------------------------- |
-| `bg.png`       | The default layer (parchment Acropolis) — painted on top.  |
-| `bg_black.png` | The layer revealed by the brush (dark/line-art Acropolis). |
-
-To change either, just **replace the file in the project root** with a new
-PNG of the same name. No code edits needed.
-
-Tips for swapping:
-
-- Use PNGs that match each other in **aspect ratio and composition** so the
-  brush reveal feels continuous (the night image should align with the
-  parchment one).
-- The page cover-fits the images, so any resolution works — `1600×900` or
-  similar landscape ratios look best on desktop.
-- If your replacement parchment has dark crackled or torn edges, they may
-  show along the viewport border. Crop them out, or tweak the overscan
-  factor (search for `1.06` in `index.html`).
-
-After replacing the files, just refresh the browser — no rebuild step.
-
-## What's in here
-
-```
-index.html      The whole site (HTML + CSS + the brush canvas JS)
-bg.png          Parchment layer (default)
-bg_black.png    Night layer (revealed by brush)
-run.sh          Starts the local server
-```
-
-Everything else (`app/`, `package.json`, `public/`, etc.) is an unused
-Next.js scaffold from an earlier draft and can be ignored.
+Refresh the browser. No rebuild. Use matching aspect ratios so the two layers align.
