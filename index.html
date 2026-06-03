@@ -34,19 +34,22 @@
   .logo {
     position: fixed;
     top: 38px;
-    left: 42px;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
     z-index: 3;
     width: 200px;
     height: auto;
     opacity: 0;
-    animation: fade 1400ms 200ms cubic-bezier(.2,.7,.2,1) forwards;
+    animation: logoFade 1400ms 200ms cubic-bezier(.2,.7,.2,1) forwards;
     pointer-events: none;
   }
 
-  @keyframes fade { to { opacity: 1; } }
+  @keyframes logoFade {
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
 
   @media (max-width: 640px) {
-    .logo { width: 150px; top: 22px; left: 22px; }
+    .logo { width: 150px; top: 22px; }
   }
 </style>
 </head>
